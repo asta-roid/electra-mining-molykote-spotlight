@@ -1,0 +1,36 @@
+%!Adobe-FontList 1.25
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:/Volumes/TOSHIBA EXT/00 - Freelance/Growth Experts/01 - Aerontech/01 - Print/10 - Expo Stand/02 - Links/02 - Package/Aerontec Expo Booth V10 Print Ready Folder/Document fonts/AdobeFnt25.lst
+FileLength:682
+FileModTime:807133590
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Arial-BoldItalicMT
+FamilyName:Arial
+StyleName:Bold Italic
+MenuName:Arial
+StyleBits:3
+WeightClass:700
+WidthClass:5
+AngleClass:1
+FullName:Arial Bold Italic
+WritingScript:Roman
+OutlineFileName:/Volumes/TOSHIBA EXT/00 - Freelance/Growth Experts/01 - Aerontech/01 - Print/10 - Expo Stand/02 - Links/02 - Package/Aerontec Expo Booth V10 Print Ready Folder/Document fonts/Arial Bold Italic.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:558672
+FileModTime:791618582
+NameArray:0,Mac,4,Arial Bold Italic
+NameArray:0,Win,1,Arial
+%EndFont
+

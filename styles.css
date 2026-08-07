@@ -1,0 +1,530 @@
+/* ==========================================================================
+   MOLYKOTE® Spotlight content block for aerontec.co.za
+   Embeds below the existing “Aerontec Spotlight” banner.
+   Mobile-first · Grid + Flexbox · No framework
+   ========================================================================== */
+
+:root {
+  /* Aerontec brand */
+  --color-purple: #492265;
+  --color-purple-deep: #371b4c;
+  --color-purple-hover: #5a2d7a;
+
+  /* Molykote accent (use sparingly) */
+  --color-teal: #00b2ad;
+  --color-teal-soft: rgba(0, 178, 173, 0.12);
+
+  /* Spotlight / site neutrals */
+  --color-text: #545454;
+  --color-text-strong: #2f2f2f;
+  --color-muted: #6b6b6b;
+  --color-border: #e0e0e0;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f5f5f7;
+  --color-surface-alt: #ececec;
+  --color-white: #ffffff;
+
+  /* Layout */
+  --max-width: 1180px;
+  --gutter: clamp(1.25rem, 4vw, 2rem);
+  --section-space: clamp(2.75rem, 6vw, 4.5rem);
+  --radius: 2px;
+  --text-measure: 40rem;
+
+  /* Type — Montserrat is the primary font on aerontec.co.za */
+  --font-heading: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration: 0.5s;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-purple);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-purple-hover);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-purple);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-strong);
+  margin: 0 0 0.75rem;
+}
+
+h1 {
+  font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+  letter-spacing: 0.01em;
+}
+
+h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+h3 {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 1rem;
+  max-width: var(--text-measure);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+figure {
+  margin: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  background: var(--color-purple);
+  color: var(--color-white);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.container {
+  width: min(100% - (var(--gutter) * 2), var(--max-width));
+  margin-inline: auto;
+}
+
+.section {
+  padding: var(--section-space) 0;
+}
+
+.section-header {
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  max-width: 42rem;
+}
+
+.section-intro {
+  color: var(--color-muted);
+}
+
+.eyebrow {
+  margin: 0 0 0.65rem;
+  color: var(--color-teal);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  max-width: none;
+}
+
+.tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  font-weight: 600;
+  color: var(--color-purple);
+  margin-bottom: 1rem;
+}
+
+/* Subtle scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(0.85rem);
+  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Buttons — Aerontec purple CTAs
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.8rem 1.45rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn--primary {
+  background: var(--color-purple);
+  color: var(--color-white);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background: var(--color-purple-hover);
+  color: var(--color-white);
+}
+
+/* --------------------------------------------------------------------------
+   Hero — text on image with booth-style faded overlay (no CTA)
+   -------------------------------------------------------------------------- */
+.spotlight-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: min(58vh, 28rem);
+  display: grid;
+  align-items: end;
+  padding: clamp(3rem, 7vw, 4.5rem) 0;
+  overflow: hidden;
+  color: var(--color-white);
+}
+
+.spotlight-hero__media,
+.spotlight-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.spotlight-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: grayscale(0.15) contrast(1.05);
+}
+
+/* Soft charcoal fade — similar atmosphere to the booth artwork */
+.spotlight-hero__overlay {
+  background:
+    linear-gradient(180deg, rgba(18, 20, 22, 0.28) 0%, rgba(18, 20, 22, 0.45) 42%, rgba(18, 20, 22, 0.78) 100%),
+    linear-gradient(90deg, rgba(18, 20, 22, 0.35) 0%, rgba(18, 20, 22, 0.12) 55%, rgba(18, 20, 22, 0.3) 100%);
+}
+
+.spotlight-hero__content {
+  max-width: none;
+  text-align: left;
+}
+
+.spotlight-hero__kicker {
+  margin: 0 0 0.85rem;
+  max-width: none;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.spotlight-hero__logo {
+  display: block;
+  width: clamp(10.5rem, 28vw, 14.5rem);
+  height: auto;
+  /* Offset transparent padding so the DuPont mark left-aligns with copy */
+  margin: 0 0 1rem calc(clamp(10.5rem, 28vw, 14.5rem) * -0.034);
+}
+
+.spotlight-hero h1 {
+  color: var(--color-white);
+  margin-bottom: 0.85rem;
+  max-width: none;
+  white-space: nowrap;
+}
+
+.spotlight-hero .lead {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.94);
+  margin-bottom: 0;
+  max-width: none;
+  white-space: nowrap;
+}
+
+/* Allow wrapping only on narrow phones so text doesn’t overflow */
+@media (max-width: 640px) {
+  .spotlight-hero h1,
+  .spotlight-hero .lead {
+    white-space: normal;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Intro
+   -------------------------------------------------------------------------- */
+.section--intro {
+  background: var(--color-surface);
+}
+
+.intro-grid {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.intro-grid__media img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-bottom: 3px solid var(--color-teal);
+}
+
+.intro-grid__media figcaption {
+  margin-top: 0.75rem;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+@media (min-width: 900px) {
+  .intro-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 3.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Why MOLYKOTE — stacked, left-aligned
+   -------------------------------------------------------------------------- */
+.section--why {
+  background: var(--color-surface-muted);
+}
+
+.benefits-layout {
+  display: grid;
+  gap: 1.5rem;
+  text-align: left;
+  justify-items: start;
+}
+
+.benefits-layout__intro {
+  max-width: none;
+}
+
+.benefits-layout__intro h2 {
+  margin-bottom: 0;
+}
+
+.benefit-list {
+  display: grid;
+  gap: 0;
+  width: 100%;
+  max-width: 42rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.benefit-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 1.25rem;
+  align-items: baseline;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-strong);
+  background: transparent;
+  text-align: left;
+}
+
+.benefit-list__index {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-teal);
+}
+
+.benefit-list__text {
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
+   Capabilities
+   -------------------------------------------------------------------------- */
+.section--capabilities {
+  background: var(--color-surface);
+}
+
+.capability-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.capability {
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.capability__media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 0.65s var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .capability:hover .capability__media img,
+  .capability:focus-within .capability__media img {
+    transform: scale(1.03);
+  }
+}
+
+.capability__body {
+  padding: 1.15rem 1.2rem 1.35rem;
+}
+
+.capability__body h3 {
+  color: var(--color-purple);
+  margin-bottom: 0.4rem;
+}
+
+.capability__body p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 700px) {
+  .capability-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .capability-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Applications
+   -------------------------------------------------------------------------- */
+.section--applications {
+  background: var(--color-surface-muted);
+  padding-bottom: clamp(3.5rem, 7vw, 5rem);
+}
+
+.applications-layout {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.app-list {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  max-width: 28rem;
+}
+
+.app-list li {
+  position: relative;
+  padding: 0.8rem 0 0.8rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-strong);
+}
+
+.app-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--color-teal);
+}
+
+.applications-layout__aside {
+  padding: clamp(1.5rem, 3.5vw, 2.15rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-purple);
+}
+
+.applications-layout__aside h3 {
+  color: var(--color-purple);
+}
+
+.applications-layout__aside p {
+  margin-bottom: 1.35rem;
+}
+
+@media (min-width: 900px) {
+  .applications-layout {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: stretch;
+    gap: 2.75rem;
+  }
+}

@@ -1,0 +1,8 @@
+.DS_Store
+.preview/
+node_modules/
+.railway/
+.env
+*.log
+reference/
+assets/AdobeFnt25.lst
