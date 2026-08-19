@@ -1,0 +1,606 @@
+/* ==========================================================================
+   MOLYKOTE® Spotlight V2 — premium pass
+   Parallel to ../styles.css. Does not replace the original.
+   Embeds below the existing “Aerontec Spotlight” banner.
+   Mobile-first · Grid + Flexbox · No framework
+   ========================================================================== */
+
+:root {
+  /* Aerontec brand */
+  --color-purple: #492265;
+  --color-purple-deep: #2f1542;
+  --color-purple-hover: #5a2d7a;
+
+  /* Molykote accent (use sparingly) */
+  --color-teal: #00b2ad;
+  --color-teal-soft: rgba(0, 178, 173, 0.12);
+
+  /* Spotlight / site neutrals */
+  --color-text: #545454;
+  --color-text-strong: #2a2a2a;
+  --color-muted: #6b6b6b;
+  --color-border: #e0e0e0;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f6f4f8;
+  --color-white: #ffffff;
+  --color-ink: #121416;
+
+  /* Layout */
+  --max-width: 1200px;
+  --gutter: clamp(1.25rem, 4vw, 2.25rem);
+  --section-space: clamp(4rem, 8vw, 6.5rem);
+  --radius: 2px;
+  --text-measure: 40rem;
+
+  /* Type — Montserrat is the primary font on aerontec.co.za */
+  --font-heading: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration: 0.55s;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-purple);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-purple-hover);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-purple);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text-strong);
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.05rem, 5vw, 3.35rem);
+}
+
+h2 {
+  font-size: clamp(1.65rem, 3.2vw, 2.4rem);
+}
+
+h3 {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+p {
+  margin: 0 0 1rem;
+  max-width: var(--text-measure);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+figure {
+  margin: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  background: var(--color-purple);
+  color: var(--color-white);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.container {
+  width: min(100% - (var(--gutter) * 2), var(--max-width));
+  margin-inline: auto;
+  min-width: 0;
+}
+
+.section {
+  padding: var(--section-space) 0;
+}
+
+.section-header {
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
+  max-width: 42rem;
+}
+
+/* Subtle scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(0.85rem);
+  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.benefit-list li.reveal:nth-child(2) { transition-delay: 0.06s; }
+.benefit-list li.reveal:nth-child(3) { transition-delay: 0.12s; }
+.benefit-list li.reveal:nth-child(4) { transition-delay: 0.18s; }
+.benefit-list li.reveal:nth-child(5) { transition-delay: 0.24s; }
+
+.capability.reveal:nth-child(2) { transition-delay: 0.08s; }
+.capability.reveal:nth-child(3) { transition-delay: 0.16s; }
+.capability.reveal:nth-child(4) { transition-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .benefit-list li.reveal,
+  .capability.reveal {
+    transition-delay: 0s;
+  }
+
+  .btn:hover,
+  .btn:focus-visible {
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 3.1rem;
+  padding: 0.85rem 1.55rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease);
+}
+
+.btn__arrow {
+  font-size: 1.05em;
+  line-height: 1;
+  transition: transform 0.2s var(--ease);
+}
+
+.btn:hover .btn__arrow,
+.btn:focus-visible .btn__arrow {
+  transform: translateX(0.2rem);
+}
+
+.btn--on-dark {
+  background: var(--color-white);
+  color: var(--color-purple);
+}
+
+.btn--on-dark:hover,
+.btn--on-dark:focus-visible {
+  background: var(--color-teal);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+.btn--on-dark:focus-visible {
+  outline-color: var(--color-white);
+}
+
+/* --------------------------------------------------------------------------
+   Hero — photography first, type in a left fade
+   -------------------------------------------------------------------------- */
+.spotlight-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: min(78vh, 42rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  padding: clamp(4.5rem, 10vw, 7rem) 0 clamp(3.25rem, 7vw, 5rem);
+  overflow: hidden;
+  color: var(--color-white);
+}
+
+.spotlight-hero__media,
+.spotlight-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.spotlight-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 42%;
+}
+
+/* Directional fade — keep the trucks visible on the right */
+.spotlight-hero__overlay {
+  background:
+    linear-gradient(90deg, rgba(12, 14, 16, 0.72) 0%, rgba(12, 14, 16, 0.38) 38%, rgba(12, 14, 16, 0.08) 68%, rgba(12, 14, 16, 0.22) 100%),
+    linear-gradient(180deg, rgba(12, 14, 16, 0.12) 0%, rgba(12, 14, 16, 0.08) 42%, rgba(12, 14, 16, 0.62) 100%);
+}
+
+.spotlight-hero__content {
+  max-width: 38rem;
+}
+
+.spotlight-hero__logo {
+  display: block;
+  width: clamp(12rem, 32vw, 17.5rem);
+  height: auto;
+  /* Offset transparent padding so the DuPont mark left-aligns with copy */
+  margin: 0 0 1.35rem calc(clamp(12rem, 32vw, 17.5rem) * -0.034);
+}
+
+.spotlight-hero h1 {
+  color: var(--color-white);
+  margin-bottom: 0.85rem;
+  max-width: none;
+  overflow-wrap: break-word;
+}
+
+.spotlight-hero .lead {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2.1vw, 1.3rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 0;
+  max-width: none;
+  overflow-wrap: break-word;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.85rem;
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding-bottom: 0.2rem;
+}
+
+.hero-cta:hover,
+.hero-cta:focus-visible {
+  color: var(--color-teal);
+  border-bottom-color: var(--color-teal);
+}
+
+.hero-cta:focus-visible {
+  outline-color: var(--color-white);
+}
+
+.hero-br {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .hero-br {
+    display: inline;
+  }
+
+  .spotlight-hero h1 {
+    font-size: clamp(1.55rem, 7.2vw, 1.9rem);
+  }
+
+  .spotlight-hero .lead {
+    font-size: 1.02rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Intro — type only; photography lives in Solutions
+   -------------------------------------------------------------------------- */
+.section--intro {
+  background: var(--color-surface);
+  padding-block: clamp(3.25rem, 6vw, 5rem);
+}
+
+.intro-copy {
+  max-width: 40rem;
+}
+
+.intro-copy h2 {
+  margin-bottom: 1.1rem;
+}
+
+.intro-copy p {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--color-text);
+  max-width: none;
+}
+
+/* --------------------------------------------------------------------------
+   Why MOLYKOTE — brand band
+   -------------------------------------------------------------------------- */
+.section--why {
+  background: var(--color-purple-deep);
+  color: var(--color-white);
+}
+
+.benefits-layout {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.benefits-layout__intro h2 {
+  color: var(--color-white);
+  margin-bottom: 0;
+}
+
+.benefit-list {
+  display: grid;
+  gap: 0;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.benefit-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.1rem 1.5rem;
+  align-items: baseline;
+  padding: 1.45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--color-white);
+}
+
+.benefit-list__index {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--color-teal);
+  font-variant-numeric: tabular-nums;
+}
+
+.benefit-list__text {
+  font-size: clamp(1.02rem, 1.5vw, 1.18rem);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+@media (min-width: 860px) {
+  .benefit-list {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Capabilities — 2×2 editorial overlays
+   -------------------------------------------------------------------------- */
+.section--capabilities {
+  background: var(--color-surface);
+}
+
+.capability-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.capability {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-ink);
+  min-height: 16rem;
+}
+
+.capability__media img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+
+.capability::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(12, 14, 16, 0.05) 28%, rgba(12, 14, 16, 0.82) 100%);
+}
+
+.capability__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 1.35rem 1.25rem 1.4rem;
+}
+
+.capability__body h3 {
+  color: var(--color-white);
+  margin-bottom: 0.35rem;
+}
+
+.capability__body p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  max-width: 28rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .capability:hover .capability__media img,
+  .capability:focus-within .capability__media img {
+    transform: scale(1.04);
+  }
+}
+
+@media (min-width: 700px) {
+  .capability-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .capability {
+    min-height: 22rem;
+  }
+
+  .capability__media img {
+    aspect-ratio: auto;
+    min-height: 22rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .capability {
+    min-height: 24rem;
+  }
+
+  .capability__media img {
+    min-height: 24rem;
+  }
+
+  .capability__body {
+    padding: 1.6rem 1.5rem 1.55rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Applications
+   -------------------------------------------------------------------------- */
+.section--applications {
+  background: var(--color-surface-muted);
+}
+
+.applications-layout h2 {
+  margin-bottom: 1.75rem;
+}
+
+.app-list {
+  display: grid;
+  gap: 0;
+}
+
+.app-list li {
+  position: relative;
+  padding: 1rem 0 1rem 1.35rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-strong);
+  font-weight: 500;
+}
+
+.app-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.4rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--color-teal);
+}
+
+@media (min-width: 800px) {
+  .app-list {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Closing CTA — inverted Aerontec band
+   -------------------------------------------------------------------------- */
+.cta-band {
+  position: relative;
+  padding: var(--section-space) 0;
+  background: var(--color-purple-deep);
+  color: var(--color-white);
+}
+
+.cta-band__content {
+  max-width: 38rem;
+}
+
+.cta-band h2 {
+  color: var(--color-white);
+  margin-bottom: 1rem;
+}
+
+.cta-band p {
+  color: rgba(255, 255, 255, 0.86);
+  margin-bottom: 1.75rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
